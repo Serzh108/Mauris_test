@@ -1,41 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import CircleLoader from 'react-spinners/CircleLoader';
+import { css } from '@emotion/core';
 import styles from './SeriesPage.module.css';
 
-const initialState = {
-  mediumImg: '',
-  originalImg: '',
-};
+const override = css`
+  display: block;
+  margin: 0 auto;
+`;
+
+// const initialState = {
+//   mediumImg: '',
+//   originalImg: '',
+// };
 
 export default function SeriesPage() {
-  const [state, setState] = useState(initialState);
+  // const [state, setState] = useState(initialState);
+  const isLoading = useSelector(state => state.series.isLoading);
+  const items = useSelector(state => state.series.items);
 
-  const getSeries = async () => {
-    const url = 'http://api.tvmaze.com/schedule?country=US&date=2020-11-12';
-    try {
-      const planetsArray = await axios.get(url);
-      console.log('planetsArray = ', planetsArray.data);
-      console.log('planetsArray = ', planetsArray.data[0].show.image.medium);
-      setState({
-        mediumImg: planetsArray.data[0].show.image.medium,
-        originalImg: planetsArray.data[0].show.image.original,
-      });
-    } catch (err) {
-      console.log('error', err);
-    }
+  console.log('items = ', items);
+
+  // useEffect(() => {
+  //   getSeries();
+  // }, []);
+
+  const liClickHandler = e => {
+    console.log('liClickHandler e.currentTarget = ', e.currentTarget.id);
   };
-
-  useEffect(() => {
-    getSeries();
-  }, []);
 
   return (
     <div className={styles.container}>
-      SeriesPage
-      <p>mediumImg:</p>
-      <img src={state.mediumImg} alt="images" />
-      <p>originalImg:</p>
-      <img src={state.originalImg} alt="images" />
+      {isLoading && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '25%',
+            left: '35%',
+            zIndex: '990',
+          }}
+        >
+          <CircleLoader
+            size={360}
+            color={'#006cff'}
+            css={override}
+            loading={isLoading}
+          />
+        </div>
+      )}
+      <NavLink to="/"> back to calendar</NavLink>
+      <p>Date</p>
+      <ul>
+        {items &&
+          items.map(item => (
+            <li key={item.id} onClick={liClickHandler} id={item.show.name}>
+              <img src={item.show.image?.medium} alt="No images" />
+              <p>{item.show.name}</p>
+              <p>{item.show.premiered.slice(0, 4)}</p>
+              <p>Сезон: {item.season}</p>
+              <p>Эпизод: {item.number}</p>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
