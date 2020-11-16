@@ -1,19 +1,20 @@
 import axios from 'axios';
 import { seriesSlice } from './seriesReduser';
+import getLocalDate from '../utils/getLocalDate';
 
 const pathSWAPI = 'http://api.tvmaze.com/schedule?country=US&date=';
 
-const getSeries = formatedData => async (dispatch, getState) => {
+const getSeries = selectedDate => async (dispatch, getState) => {
   dispatch(seriesSlice.actions.setIsLoading());
-  // const { current } = getState().planets;
+  const formatedData = selectedDate.toISOString().slice(0, 10);
+  const queryDate = getLocalDate(selectedDate);
+  // console.log('queryDate = ', new Date(selectedDate - 1))
   const url = pathSWAPI + formatedData;
   try {
     const seriesArray = await axios.get(url);
     console.log('Operations seriesArray.data = ', seriesArray.data);
     const result = [...seriesArray.data];
-    // console.log('typeof result = ', typeof result, result.length);
-    // const result = { ...seriesArray.data, current: url };
-    dispatch(seriesSlice.actions.getSeries({ result }));
+    dispatch(seriesSlice.actions.getSeries({ result, queryDate }));
   } catch (err) {
     console.log('getSeries error', err);
   }

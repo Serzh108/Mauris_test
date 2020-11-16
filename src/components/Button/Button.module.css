@@ -1,0 +1,7 @@
+.btn {
+  width: 96%;
+  margin-bottom: 16px; /* temp */
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}

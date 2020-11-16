@@ -1,27 +1,19 @@
-.container {
-  color: blue;
-}
-
-/* .item {
+.item {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   border: 1px solid red;
-} 
+}
+
+.item img {
+  cursor: pointer;
+}
 
 .itemInfo {
   display: flex;
   flex-direction: column;
-  justify-content: space-between ;
+  justify-content: space-between;
   align-items: flex-start;
   border: 1px solid green;
-}  */
-
-/* .btn {
-  width: 96%;
-  margin-bottom: 16px; 
-  border-radius: 8px;
-  outline: none;
-  cursor: pointer;
-} */
+}

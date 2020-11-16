@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import DatePage from './pages/DatePage/DatePage.js';
 import SeriesPage from './pages/SeriesPage/SeriesPage';
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (

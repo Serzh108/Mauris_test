@@ -3,32 +3,35 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
+// import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import styles from './SeriesPage.module.css';
+import FilmItem from '../../components/FilmItem/FilmItem';
+import Button from '../../components/Button/Button';
 
 const override = css`
   display: block;
   margin: 0 auto;
 `;
 
-// const initialState = {
-//   mediumImg: '',
-//   originalImg: '',
-// };
+const MAIN_FILM = 2;
 
 export default function SeriesPage() {
-  // const [state, setState] = useState(initialState);
+  const [showMore, setShowMore] = useState(true);
   const isLoading = useSelector(state => state.series.isLoading);
   const items = useSelector(state => state.series.items);
+  const queryDate = useSelector(state => state.series.queryDate);
 
   console.log('items = ', items);
+
+  const btnHandler = () => {
+    setShowMore(!showMore);
+  };
 
   // useEffect(() => {
   //   getSeries();
   // }, []);
-
-  const liClickHandler = e => {
-    console.log('liClickHandler e.currentTarget = ', e.currentTarget.id);
-  };
 
   return (
     <div className={styles.container}>
@@ -49,20 +52,37 @@ export default function SeriesPage() {
           />
         </div>
       )}
-      <NavLink to="/"> back to calendar</NavLink>
-      <p>Date</p>
+      <NavLink to="/">
+        <NavigateBeforeIcon
+          style={{
+            // opacity: 0.9,
+            fontSize: 24,
+            marginRight: '4px',
+            cursor: 'pointer',
+            color: 'red',
+          }}
+        ></NavigateBeforeIcon>
+      </NavLink>
+
+      <p>{queryDate}</p>
       <ul>
         {items &&
-          items.map(item => (
-            <li key={item.id} onClick={liClickHandler} id={item.show.name}>
-              <img src={item.show.image?.medium} alt="No images" />
-              <p>{item.show.name}</p>
-              <p>{item.show.premiered.slice(0, 4)}</p>
-              <p>Сезон: {item.season}</p>
-              <p>Эпизод: {item.number}</p>
-            </li>
-          ))}
+          items.map((item, idx) => {
+            if (showMore) {
+              return idx < MAIN_FILM ? (
+                <FilmItem item={item} key={item.id} />
+              ) : null;
+            } else {
+              return <FilmItem item={item} key={item.id} />;
+            }
+          })}
       </ul>
+      {/* <ul>{items && items.map(item => <FilmItem item={item} />)}</ul> */}
+      <Button
+        quontity={items.length - MAIN_FILM}
+        showMore={showMore}
+        btnHandler={btnHandler}
+      />
     </div>
   );
 }
