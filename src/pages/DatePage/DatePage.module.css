@@ -1,3 +1,16 @@
 .container {
-  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.tvImage {
+  padding-top: 1em;
+}
+
+.discription {
+  width: 66.7%;
+  padding: 1em 0;
 }

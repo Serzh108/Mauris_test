@@ -17,7 +17,7 @@ export default function SimpleModal({ open, handleClose, imgSrc }) {
 
   const body = (
     <div className={classes.paper}>
-      <img src={imgSrc} alt="test" width="100%" />
+      <img src={imgSrc} alt="original img" width="100%" />
     </div>
   );
 
