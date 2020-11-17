@@ -28,8 +28,6 @@ export default function SeriesPage() {
     dispatch(getSeries());
   }, [dispatch]);
 
-  console.log('items = ', items);
-
   const btnHandler = () => {
     setShowMore(!showMore);
   };
@@ -41,13 +39,13 @@ export default function SeriesPage() {
         <div
           style={{
             position: 'absolute',
-            top: '25%',
-            left: '25%',
+            top: '20%',
+            left: '10%',
             zIndex: '990',
           }}
         >
           <CircleLoader
-            size={360}
+            size={300}
             color={'#006cff'}
             css={override}
             loading={isLoading}
@@ -68,7 +66,6 @@ export default function SeriesPage() {
             }
           })}
       </ul>
-      {/* <ul>{items && items.map(item => <FilmItem item={item} />)}</ul> */}
       <Button
         quontity={items.length - MAIN_FILM}
         showMore={showMore}

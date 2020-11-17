@@ -1,5 +1,5 @@
 # Mauris_test
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Реализовано web-приложение. Все пункты текущего задания.
+# Только под мобильные устройства. desktop версии нет!!! 
+# Ссылка на развернутую версию: https://mauris-test-serzh108.netlify.app/

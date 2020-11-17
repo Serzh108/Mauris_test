@@ -7,10 +7,6 @@ export default function FilmItem({ item }) {
   const srcRef = useRef(null);
 
   const liClickHandler = e => {
-    // console.log(
-    //   'liClickHandler e.currentTarget = ',
-    //   e.currentTarget.dataset.originalImg,
-    // );
     srcRef.current = e.currentTarget.dataset.originalImg;
     setOpen(true);
   };

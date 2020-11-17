@@ -11,7 +11,6 @@ const getSeries = () => async (dispatch, getState) => {
   const url = pathSWAPI + formatedData;
   try {
     const seriesArray = await axios.get(url);
-    // console.log('Operations seriesArray.data = ', seriesArray.data);
     const result = [...seriesArray.data];
     dispatch(seriesSlice.actions.getSeries({ result }));
   } catch (err) {
