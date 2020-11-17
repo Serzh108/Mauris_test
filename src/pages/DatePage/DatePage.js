@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
-import { getSeries } from '../../redux/seriesOperations';
+import { getSeries, setQueryDate } from '../../redux/seriesOperations';
+import Header from '../../components/Header/Header';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './DatePage.module.css';
 import tvImage from '../../assets/images/tv.png';
@@ -12,10 +13,13 @@ export default function DatePage() {
   const [isFirstTime, setIsFirstTime] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  console.log('location = ', location.pathname);
 
   useEffect(() => {
     const clickHandler = () => {
-      dispatch(getSeries(selectedDate));
+      // dispatch(getSeries(selectedDate));
+      dispatch(setQueryDate(selectedDate));
       history.push('/series');
     };
     !isFirstTime && clickHandler();
@@ -31,6 +35,7 @@ export default function DatePage() {
 
   return (
     <div className={styles.container}>
+      <Header />
       <img src={tvImage} alt="TV" />
       <p>
         Для получения списка сериалов, пожалуйста, выберите необходимый месяц и

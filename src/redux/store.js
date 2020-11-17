@@ -19,7 +19,8 @@ import { seriesSlice } from './seriesReduser';
 
 const middleware = [
   ...getDefaultMiddleware({
-    // serializableCheck: {
+    serializableCheck: false,
+    // {
     //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     // },
   }),

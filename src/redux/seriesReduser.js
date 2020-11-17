@@ -4,7 +4,7 @@ const state = {
   // current: 1,
   // previous: '',
   // next: '',
-  queryDate: '123',
+  queryDate: new Date(),
   items: [],
   isLoading: false,
   // residentsName: [],
@@ -17,7 +17,11 @@ export const seriesSlice = createSlice({
     getSeries: (state, { payload }) => ({
       ...state,
       items: [...payload.result],
-      queryDate: payload.queryDate,
+      // queryDate: payload.queryDate,
+    }),
+    setQueryDate: (state, { payload }) => ({
+      ...state,
+      queryDate: payload.selectedDate,
     }),
     // getSeries: (state, { payload }) => ({
     //   ...state,
