@@ -7,8 +7,6 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 30px;
-  /* display: flex; */
-  /* justify-content: center; */
   background-color: rgb(255, 255, 255);
 }
 
@@ -45,19 +43,3 @@ button:hover {
 button:focus {
   outline: none;
 }
-
-/* .container {
-  width: 280px;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 85%;
-  }
-
-@media (min-width: 1280px) {
-  .container {
-    width: 85%;
-  }
-} */
